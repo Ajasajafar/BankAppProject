@@ -2,6 +2,18 @@ from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 import auto_push
 
+app = Flask(__name__)
+
+
+
+
+
+
+
+
+
+
+
 # initialize or use auto_push as needed. Do NOT call it at import-time to avoid
 # unexpected side effects when other modules import `app` (for tests, tooling,
 # or WSGI servers). Call it when running the module directly.
