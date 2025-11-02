@@ -10,13 +10,17 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///bank.db'  #permanent db file
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 #     initialize the database with the app
+db = SQLAlchemy(app)
 
 # DEFINE TABLE STRUCTURE (Model)
+class User(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	name = db.Column(db.String(100), nullable=False)
+	balance = db.Column(db.Numeric(12, 2), default=0.00, nullable = False)
 #     each model = a table in the database
 #     each class variable = a column
 
-# WHEN PROGRAM STARTS
-#     create all tables (if not existing)
+
 
 # WHEN USER SAVES DATA
 #     create a new record (row)
@@ -28,24 +32,19 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 #     display them
 # END
 
-
-
-
-
-
-
-
-
-
-
 # initialize or use auto_push as needed. Do NOT call it at import-time to avoid
 # unexpected side effects when other modules import `app` (for tests, tooling,
 # or WSGI servers). Call it when running the module directly.
 atexit.register(auto_push.auto_push)
 
 if __name__ == "__main__":
-	# Running the module directly (e.g. `python app.py`) intentionally triggers
-	# the auto-push behavior. For normal imports, this block will not execute.
+	# Create all tables before starting the server so the app has its schema
+	# available when handling requests. This runs only when the module is
+	# executed directly (not when imported by tests/tooling).
+	with app.app_context():
+		db.create_all()
+
+	# Running the module directly (e.g. `python app.py`) will start the server.
 	app.run(debug=True)
 
 
