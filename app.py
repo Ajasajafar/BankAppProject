@@ -3,7 +3,26 @@ from flask_sqlalchemy import SQLAlchemy
 import atexit
 import auto_push
 
-app = Flask(__name__)
+# START FLASK APP
+#     set database connection settings
+#     initialize the database with the app
+
+# DEFINE TABLE STRUCTURE (Model)
+#     each model = a table in the database
+#     each class variable = a column
+
+# WHEN PROGRAM STARTS
+#     create all tables (if not existing)
+
+# WHEN USER SAVES DATA
+#     create a new record (row)
+#     add to database session
+#     commit to save permanently
+
+# WHEN USER WANTS TO SEE DATA
+#     query the table for matching rows
+#     display them
+# END
 
 
 
