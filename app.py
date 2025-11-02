@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template,request, redirect
 from flask_sqlalchemy import SQLAlchemy
 import atexit
 import auto_push
@@ -20,12 +20,26 @@ class User(db.Model):
 #     each model = a table in the database
 #     each class variable = a column
 
-
+@app.route('/')
+def home():
+	return render_template('index.html')
 
 # WHEN USER SAVES DATA
+@app.route('/create', methods=['POST'])
+def create_account():
 #     create a new record (row)
+	name = request.form['name']
+	new_acc = User(name=name, balance=0.00)
+
 #     add to database session
+	db.session.add(new_acc)
+
 #     commit to save permanently
+	db.session.commit()
+	return redirect('/')
+
+
+
 
 # WHEN USER WANTS TO SEE DATA
 #     query the table for matching rows
