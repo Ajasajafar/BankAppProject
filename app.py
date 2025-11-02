@@ -4,7 +4,11 @@ import atexit
 import auto_push
 
 # START FLASK APP
+app = Flask(__name__)
 #     set database connection settings
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///bank.db'  #permanent db file
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 #     initialize the database with the app
 
 # DEFINE TABLE STRUCTURE (Model)
