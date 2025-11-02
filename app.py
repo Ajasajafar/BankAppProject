@@ -38,7 +38,7 @@ def create_account():
 	db.session.commit()
 	return redirect('/')
 
-
+@
 
 
 # WHEN USER WANTS TO SEE DATA
