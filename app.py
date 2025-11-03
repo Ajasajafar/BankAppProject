@@ -53,6 +53,13 @@ def deposit():
 
 		db.session.commit()
 
+When user opens /withdraw → show a form.
+When submitted (POST):
+    - Read name and amount.
+    - Find user.
+    - If not found → show “User not found”.
+    - If balance < amount → show “Insufficient funds”.
+    - Otherwise → subtract amount, commit, show success message.
 
 
 # initialize or use auto_push as needed. Do NOT call it at import-time to avoid
