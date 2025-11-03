@@ -38,13 +38,22 @@ def create_account():
 	db.session.commit()
 	return redirect('/')
 
-@
+@app.route('/deposit', methods=['GET', 'POST'])
+def deposit():
+	if request.method == 'POST':
+		name = request.form['name']
+		deposit_amount = float(request.form['amount'])
+
+		user = User.query.filter_by(name=name).first()
+		if user:
+			user.balance += deposit_amount
+		else:
+			user = User(name=name, balance=deposit_amount)
+			db.session.add(user)
+
+		db.session.commit()
 
 
-# WHEN USER WANTS TO SEE DATA
-#     query the table for matching rows
-#     display them
-# END
 
 # initialize or use auto_push as needed. Do NOT call it at import-time to avoid
 # unexpected side effects when other modules import `app` (for tests, tooling,
